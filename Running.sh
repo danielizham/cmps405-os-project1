@@ -6,5 +6,34 @@
 # Assignment : Project 1
 # Instructor : Heba D. M. Dawoud
 
-# for testing purposes
-echo TESTING: Running.sh was called!
+
+function sub1 {
+  echo "*******************************************************"
+  echo "$LOGNAME is currently logged in the linux system"
+  echo "The current date and time on the linux system is $(date)"
+  echo "$(who -b)"
+  echo "The current working path is $(pwd)"
+  echo "The current shell is $SHELL"
+  echo "My home directory is $HOME with \# of files and directories in my home = $(ls -l ~ | wc -l)"
+  echo "This Script will do something :)"
+  echo "*******************************************************"
+}
+
+sub1
+
+function sub2() {
+  if [[ "$(date "+%H-%M")" = "23-59" ]]; then
+    sleep 600
+    ./Connectivity.sh
+    ./Hardware.sh
+    sleep 600
+    ./FileSystem.sh
+    ./Performance.sh
+  fi
+  trap "./Trap.sh" SIGINT SIGTERM
+}
+
+while true
+do
+  	sub2
+done
