@@ -21,12 +21,18 @@ create_stats() {
 }
 
 backup_rw_files() {
-	local date_time_now="$(date +"%y%m%d%H%M%S")"
+	date_time_now="$(date +"%y%m%d%H%M%S")"
 	mkdir "$date_time_now"
 	find ~ -type f -perm 600 -exec cp '{}' "$date_time_now"/ +
 	local owner="$(stat -c "%U" "$date_time_now"/)"
 	find "$date_time_now" -user "$owner" -exec chmod 400 '{}' +
 }
 
+display_info() {
+	find "$date_time_now"/ -maxdepth 1 -mindepth 1 -perm -444 | wc -l # read permission for owner only or all?
+	echo "Backing up performance data has completed. Exiting..."
+}
+
 create_stats
 backup_rw_files
+display_info
