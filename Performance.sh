@@ -20,5 +20,13 @@ create_stats() {
 	mv Phase1.tar.gz "$time_now"/
 }
 
-create_stats
+backup_rw_files() {
+	local date_time_now="$(date +"%y%m%d%H%M%S")"
+	mkdir "$date_time_now"
+	find ~ -type f -perm 600 -exec cp '{}' "$date_time_now"/ +
+	local owner="$(stat -c "%U" "$date_time_now"/)"
+	find "$date_time_now" -user "$owner" -exec chmod 400 '{}' +
+}
 
+create_stats
+backup_rw_files
