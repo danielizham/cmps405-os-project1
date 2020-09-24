@@ -11,11 +11,11 @@
 cat /dev/null > OUTFILE.txt
 cat /dev/null > HOLDFILE.txt
 
-function sub1() {
+function displayDate() {
   echo "Date/Time of Search: $(date)" >> OUTFILE.txt
 }
 
-function sub2() {
+function search() {
   echo "Searching for Files Larger Than 8Mb starting in $HOME"
   echo "Please Standby for the Search Results..."
   find ~ -size +8M 2>/dev/null > HOLDFILE.txt
@@ -29,12 +29,12 @@ function sub2() {
   fi
 }
 
-function sub3() {
+function displayResults() {
   echo "These search results are stored in $HOME/OUTFILE.txt"
   echo "Search complete...Exiting..."
   cat OUTFILE.txt
 }
 
-sub1
-sub2
-sub3
+displayDate
+search
+displayResults
