@@ -7,4 +7,9 @@
 # Instructor : Heba D. M. Dawoud
 
 # for testing purposes
-echo TESTING: Trap.sh was called!
+
+displayError() {
+  echo "  Control-C not available"
+}
+
+displayError

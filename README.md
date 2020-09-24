@@ -8,7 +8,7 @@
 >Semester : Fall 2020
 
 **Phase 1 - Due by the 26th of September 2020**
-- [ ] Task 1: Running.sh
+- [x] Task 1: Running.sh
 - [ ] Task 2: Performance.sh
 - [ ] Task 3: FileSystem.sh
 

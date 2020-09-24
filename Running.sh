@@ -7,23 +7,23 @@
 # Instructor : Heba D. M. Dawoud
 
 
-function sub1 {
+function header() {
   echo "*******************************************************"
   echo "$LOGNAME is currently logged in the linux system"
   echo "The current date and time on the linux system is $(date)"
   echo "$(who -b)"
   echo "The current working path is $(pwd)"
   echo "The current shell is $SHELL"
-  echo "My home directory is $HOME with \# of files and directories in my home = $(ls -l ~ | wc -l)"
-  echo "This Script will do something :)"
+  echo "My home directory is $HOME with # of files and directories in my home = $(ls -la ~ | wc -l)"
+  echo "This Process will Retrieve and Display Information about Hardware, Connectivity, File Systems and Performance Every 24 hours starting at 23:59"
   echo "*******************************************************"
+  echo "Waiting for results..."
 }
 
-sub1
+header
 
-function sub2() {
-  if [[ "$(date "+%H-%M")" = "23-59" ]]; then
-    sleep 600
+function runScripts() {
+  if [[ "$(date "+%H-%M-%S")" = "23-59-00" ]]; then
     ./Connectivity.sh
     ./Hardware.sh
     sleep 600
@@ -35,5 +35,5 @@ function sub2() {
 
 while true
 do
-  	sub2
+  	runScripts
 done
