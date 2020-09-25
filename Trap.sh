@@ -6,5 +6,11 @@
 # Assignment : Project 1
 # Instructor : Heba D. M. Dawoud
 
-# for testing purposes
-echo TESTING: Trap.sh was called!
+
+# A subroutine to inform user
+displayError() {
+  echo "  Control-C not available"
+}
+
+# Calling the subroutine
+displayError
