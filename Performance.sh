@@ -35,7 +35,14 @@ backup_rw_files() {
 }
 
 display_info() {
-	find "$date_time_now"/ -maxdepth 1 -mindepth 1 -perm -444 | wc -l # read permission for owner only or all?
+	# count only files that have u=r (do not count dirs 
+	# nor files with u=-, u=rwx, u=rw, u=wx, u=w or u=x).
+	echo -n "The number of files with u=r in dir "$date_time_now"/: "
+	find "$date_time_now" -type f \  # find only files
+		\( -perm -400 \) \	 # that have at least 400
+		-and \
+		\( -not -perm -600 \) \  # but not more than 600
+		| wc -l                  # then count them
 	echo "Backing up performance data has completed. Exiting..."
 }
 
