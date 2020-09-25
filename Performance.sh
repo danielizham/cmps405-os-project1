@@ -6,9 +6,6 @@
 # Assignment : Project 1
 # Instructor : Heba D. M. Dawoud
 
-# for testing purposes
-echo TESTING: Performance.sh was called!
-
 create_stats() {
 	# this subroutine backs up information about the current
 	# status of this computer and archives it
