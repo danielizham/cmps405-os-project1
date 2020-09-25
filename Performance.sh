@@ -17,7 +17,7 @@ create_stats() {
 	tar zcf Phase1.tar.gz Disk_Usage.txt cpu_inf.txt Message_Count.txt
 	local time_now="$(date +"%H%M%S")"
 	mkdir "$time_now"
-	mv Phase1.tar.gz "$time_now"/
+	cp Phase1.tar.gz "$time_now"/
 }
 
 backup_rw_files() {
