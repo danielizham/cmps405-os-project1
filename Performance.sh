@@ -23,7 +23,12 @@ create_stats() {
 backup_rw_files() {
 	date_time_now="$(date +"%y%m%d%H%M%S")"
 	mkdir "$date_time_now"
-	find ~ -type f -perm 600 -exec cp '{}' "$date_time_now"/ +
+	find ~ -type f \                 # find all files only
+		\( -perm -600 \) \       # that have at least 600
+		-and \
+		\( -not -perm -700 \) \  # but not more than 700
+		# then copy them to the newly created directory
+		-exec cp '{}' "$date_time_now"/ +  
 	
 	# for this directory and its content, change only the owner
 	# permission with rw to r (igore the group and others).
