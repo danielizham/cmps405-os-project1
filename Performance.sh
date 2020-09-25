@@ -24,8 +24,14 @@ backup_rw_files() {
 	date_time_now="$(date +"%y%m%d%H%M%S")"
 	mkdir "$date_time_now"
 	find ~ -type f -perm 600 -exec cp '{}' "$date_time_now"/ +
-	local owner="$(stat -c "%U" "$date_time_now"/)"
-	find "$date_time_now" -user "$owner" -exec chmod 400 '{}' +
+	
+	# for this directory and its content, change only the owner
+	# permission with rw to r (igore the group and others).
+	find "$date_time_now" \          # find all dirs and files
+		\( -perm -600 \) \       # that have at least 600
+		-and \
+		\( -not -perm -700 \) \  # but not more than 700
+		-exec chmod u=r '{}' +	 # change owner perm to r
 }
 
 display_info() {
