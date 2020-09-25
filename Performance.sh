@@ -10,6 +10,9 @@
 echo TESTING: Performance.sh was called!
 
 create_stats() {
+	# this subroutine backs up information about the current
+	# status of this computer and archives it
+
 	du --max-depth=1 --human-readable ~ | sort --human-numeric-sort --reverse --output=Disk_Usage.txt
 	dmesg -H > Message_Log.txt
 	cat /proc/cpuinfo > cpu_inf.txt
@@ -21,6 +24,10 @@ create_stats() {
 }
 
 backup_rw_files() {
+	# this subroutine makes a copy of each file in the home
+	# directory with a permission u=rw in a backup directory.
+	# Then, their permissions are modified to u=r.
+
 	date_time_now="$(date +"%y%m%d%H%M%S")"
 	mkdir "$date_time_now"
 	find ~ -type f \                 # find all files only
@@ -40,6 +47,9 @@ backup_rw_files() {
 }
 
 display_info() {
+	# this subroutine displays to the console for the user
+	# the conclusion of the first two subroutines.
+
 	# count only files that have u=r (do not count dirs 
 	# nor files with u=-, u=rwx, u=rw, u=wx, u=w or u=x).
 	echo -n "The number of files with u=r in dir "$date_time_now"/: "
