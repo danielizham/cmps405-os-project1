@@ -6,6 +6,11 @@
 # Assignment : Project 1
 # Instructor : Heba D. M. Dawoud
 
+# NOTE: This script may take a noticeable few seconds due to copying
+# and changing permissions of a large number of files in the second
+# subroutine. This is much more so if the script is placed in the
+# $HOME directory where recursion may occur.
+
 # This subroutine backs up information about the current
 # status of this computer and archives it
 create_stats() {
