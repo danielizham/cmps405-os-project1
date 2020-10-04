@@ -7,7 +7,8 @@
 # Instructor : Heba D. M. Dawoud
 
 # This subroutine outputs to stdout and the check.txt file
-# the used and free memory values in percentages.
+# the percentages of used and free memory every second for
+# one minute.
 disp_mem() {
     printf "Used Memory\tFree Memory\n" | tee -a check.txt
     for t in $(seq 1 60); do
