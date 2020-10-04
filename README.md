@@ -13,6 +13,6 @@
 - [x] Task 3: FileSystem.sh
 
 **Phase 2 - Due by the 10th of October 2020**
-- [ ] Task 4: Connectivity.sh
+- [x] Task 4: Connectivity.sh
 - [ ] Task 5: Hardware.sh
 - [ ] Task 6: Trap.sh
