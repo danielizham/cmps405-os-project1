@@ -9,9 +9,10 @@
 
 # This subroutine ignores SIGTERM and SIGINT
 # interrupts caught by the Running.sh script.
-doNothing() {
-    return
+ignoreTermAndInt() {
+    # Do nothing when interrupted by TERM or INT signals
+    trap '' SIGTERM SIGINT
 }
 
-# Calling the subroutine
-doNothing
+# Call the subroutine
+ignoreTermAndInt
