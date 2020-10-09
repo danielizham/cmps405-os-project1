@@ -25,7 +25,7 @@ function checkConnectivity() {
 
 function checkSpeeds() {
   # Gets the Ethernet Network interface in order to use in the next command
-  netName=`ip link | awk -F: '$0 !~ "lo|vir|wl|^[^0-9]"{print $2;getline}'`
+  netName="$(ip link | awk -F: '$0 !~ "lo|vir|wl|^[^0-9]"{print $2;getline}')"
   # Searches in the content of /proc/net/dev and extracts information about current download and upload speed, Tested with ping
   awk '{i++; recv[i]=$1; trans[i]=$2}; END{print "Current Download Speed: " (recv[2]-recv[1])/1000 " KBps \nCurrent Upload Speed: " (trans[2]-trans[1])/1000 " KBps"}' <(cat /proc/net/dev | grep "$netName" | awk -F' ' '{print $2 " " $10}'; sleep 1; cat /proc/net/dev | grep "$netName" | awk -F' ' '{print $2 " " $10}') > UPDOWN.txt
 }
