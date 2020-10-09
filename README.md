@@ -14,5 +14,5 @@
 
 **Phase 2 - Due by the 10th of October 2020**
 - [x] Task 4: Connectivity.sh
-- [ ] Task 5: Hardware.sh
-- [ ] Task 6: Trap.sh
+- [x] Task 5: Hardware.sh
+- [x] Task 6: Trap.sh

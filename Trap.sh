@@ -7,10 +7,12 @@
 # Instructor : Heba D. M. Dawoud
 
 
-# A subroutine to inform user
-displayError() {
-  echo "  Control-C not available"
+# This subroutine ignores SIGTERM and SIGINT
+# interrupts caught by the Running.sh script.
+ignoreTermAndInt() {
+    # Do nothing when interrupted by TERM or INT signals
+    trap '' SIGTERM SIGINT
 }
 
-# Calling the subroutine
-displayError
+# Call the subroutine
+ignoreTermAndInt
