@@ -6,13 +6,11 @@
 # Assignment : Project 1
 # Instructor : Heba D. M. Dawoud
 
-
 # This subroutine ignores SIGTERM and SIGINT
 # interrupts caught by the Running.sh script.
-ignoreTermAndInt() {
-    # Do nothing when interrupted by TERM or INT signals
-    trap '' SIGTERM SIGINT
+doNothing() {
+    return
 }
 
 # Call the subroutine
-ignoreTermAndInt
+doNothing
