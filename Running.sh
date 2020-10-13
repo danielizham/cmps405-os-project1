@@ -24,15 +24,21 @@ function header() {
 
 # Call header Subroutine
 header
+echo
 
 function runScripts() {
   # The if statement will be executed if the time is 11.59pm
   if [[ "$(date "+%H-%M-%S")" = "23-59-00" ]]; then
     ./Connectivity.sh
+    echo
     ./Hardware.sh
+    echo
     sleep 600 # wait for 10 minutes
     ./FileSystem.sh
+    echo
     ./Performance.sh
+    echo
+    echo "Today's system monitoring process has completed successfully!"
   fi
   # Catch the 2 interrupts and handle them with Trap.sh
   # which returns nothing/NULL to ignore them.
