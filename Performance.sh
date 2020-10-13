@@ -14,12 +14,18 @@
 # This subroutine backs up information about the current
 # status of this computer and archives it
 create_stats() {
+	# disk usage of home dir
 	du --max-depth=1 --human-readable ~ \
 		| sort --human-numeric-sort --reverse --output=Disk_Usage.txt
+	# kernel output
 	dmesg -H > Message_Log.txt
+	# information on the CPU
 	cat /proc/cpuinfo > cpu_inf.txt
+	# word count of the kernel output
 	cat Message_Log.txt | wc -w > Message_Count.txt
+	# compress the files above
 	tar zcf Phase1.tar.gz Disk_Usage.txt cpu_inf.txt Message_Count.txt
+	# copy the compressed file to a folder with current time as its name
 	local time_now="$(date +"%H%M%S")"
 	mkdir "$time_now"
 	cp Phase1.tar.gz "$time_now"/
@@ -39,7 +45,7 @@ backup_rw_files() {
 	        2> /dev/null	
 		# find all files only
 	        # that have at least 600
-		# but not more than 700
+		# but not 700 or more (i.e u=rw but g & o can be anything)
 		# then copy them to the newly created directory
 	
 	# for this directory and its content, change only the owner
@@ -51,7 +57,7 @@ backup_rw_files() {
 		-exec chmod u=r '{}' +
 		# find all dirs and files
 	        # that have at least 600
-		# but not more than 700
+		# but not 700 or more (i.e u=rw but g & o can be anything)
 		# change owner perm to r
 }
 
@@ -68,7 +74,7 @@ display_info() {
 		| wc -l
 		# find only files
 		# that have at least 400
-		# but not more than 600
+		# but not 600 or more (i.e u=r but g & o can be anything)
 		# then count them
 	echo "Backing up performance data has completed. Exiting..."
 }
