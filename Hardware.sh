@@ -17,12 +17,14 @@ disp_mem() {
 	# Extract the line about the memory info from the free command
         mem_info=$(free | grep Mem) 
 
-	# Divide the used and free values respectively by the total
+	# Divide the 3rd column (used memory) and the
+	# 4th column (free memory) values respectively 
+	# by the 2nd column (total memory) value 
 	# and multiply by 100 to convert to percentage
         used=$(echo "$mem_info" | awk '{print $3/$2 * 100.0}')
         free=$(echo "$mem_info" | awk '{print $4/$2 * 100.0}')
 
-	# Print out the percentages every second
+	# Print out the percentages
         printf "%.2f%%\t\t%.2f%%\n" $used $free | tee -a check.txt
         sleep 1s
     done
