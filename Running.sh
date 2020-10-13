@@ -13,10 +13,10 @@ function header() {
   echo "*******************************************************"
   echo "$LOGNAME is currently logged in the linux system"
   echo "The current date and time on the linux system is $(date)"
-  echo "$(who -b)"
+  echo "$(who -b)" # Display system boot time
   echo "The current working path is $(pwd)"
   echo "The current shell is $SHELL"
-  echo "My home directory is $HOME with # of files and directories in my home = $(ls -1A ~ | wc -l)"
+  echo "My home directory is $HOME with # of files and directories in my home = $(ls -1A ~ | wc -l)" # ls one file per line without ./ and ../
   echo "This Process will Retrieve and Display Information about Hardware, Connectivity, File Systems and Performance Every 24 hours starting at 23:59"
   echo "*******************************************************"
   echo "Waiting for results..."
@@ -26,7 +26,7 @@ function header() {
 header
 
 function runScripts() {
-  # The if statment will be executed in every iteration to check whether time matches
+  # The if statement will be executed if the time is 11.59pm
   if [[ "$(date "+%H-%M-%S")" = "23-59-00" ]]; then
     ./Connectivity.sh
     ./Hardware.sh
@@ -34,7 +34,8 @@ function runScripts() {
     ./FileSystem.sh
     ./Performance.sh
   fi
-  # The trap command to catch and ignore interrupts, call Trap.sh and display a message
+  # Catch the 2 interrupts and handle them with Trap.sh
+  # which returns nothing/NULL to ignore them.
   trap "./Trap.sh" SIGINT SIGTERM
 }
 
