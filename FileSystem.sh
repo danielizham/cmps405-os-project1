@@ -22,7 +22,7 @@ function search() {
   # To find all files larger than 8M and send results to the file; Errors are redirected to /dev/null
   find ~ -size +8M 2>/dev/null > HOLDFILE.txt
 
-  if [[ -z "$(wc -c < HOLDFILE.txt)" ]]; then
+  if [[ ! -s "HOLDFILE.txt" ]]; then
     # If no files were found, HOLDFILE.txt will be an empty string
     echo "No files were found that are larger than 8MB"
     echo "Exiting..."
